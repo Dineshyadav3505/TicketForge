@@ -27,7 +27,7 @@ public class InventoryService {
     }
 
     @RateLimiter(name = "inventory-events-rate-limit", fallbackMethod = "getAllEventsFallback")
-    public List<EventInventoryResponse> getAllEvents() {
+    public List<EventInventoryResponse> getAllEvents() throws Exception {
         final List<EventEntity> events = eventRepository.findAll();
 
         return events.stream().map(event -> EventInventoryResponse.builder()
@@ -38,7 +38,7 @@ public class InventoryService {
     }
 
     @RateLimiter(name = "inventory-events-rate-limit", fallbackMethod = "getAllEventsFallback")
-    public VenueInventoryResponse getVenueInformation(final Long venueId) {
+    public VenueInventoryResponse getVenueInformation(final Long venueId) throws Exception  {
         final VenueEntity venue = venueRepository.findById(venueId).orElse(null);
 
         return VenueInventoryResponse.builder()

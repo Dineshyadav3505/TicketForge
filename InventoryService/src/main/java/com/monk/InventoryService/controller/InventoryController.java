@@ -15,18 +15,27 @@ public class InventoryController {
 
     final private InventoryService inventoryService;
 
-    public InventoryController(InventoryService inventoryService){
+    public InventoryController(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 
     @GetMapping("/inventory/events")
     public @ResponseBody List<EventInventoryResponse> inventoryGetAllEvents() {
-        return inventoryService.getAllEvents();
+        try {
+            return inventoryService.getAllEvents();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/inventory/venue/{venueId}")
     public @ResponseBody VenueInventoryResponse inventoryByVenueId(@PathVariable("venueId") Long venueId) {
-        return inventoryService.getVenueInformation(venueId);
+        try {
+            return inventoryService.getVenueInformation(venueId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @GetMapping("/inventory/event/{eventId}")
