@@ -4,7 +4,6 @@ WORKDIR /app
 
 # Copy Maven wrapper files first (for layer caching)
 COPY mvnw mvnw
-COPY .mvn .mvn
 COPY pom.xml .
 
 # Download dependencies (cached layer)
