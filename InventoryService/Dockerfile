@@ -3,12 +3,10 @@ FROM eclipse-temurin:21-jdk AS builder
 WORKDIR /app
 
 # Copy Maven wrapper files first (for layer caching)
-COPY mvnw mvnw
 COPY pom.xml .
-
-# Download dependencies (cached layer)
-RUN mkdir -p .mvn
-RUN ./mvnw dependency:go-offline -B
+RUN apt-get update && apt-get install -y maven && \
+    mvn dependency:go-offline -B && \
+    apt-get clean
 
 # Copy source and build
 COPY src ./src

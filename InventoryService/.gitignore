@@ -33,3 +33,7 @@ build/
 
 ### Environment Variables ###
 .env
+
+.mvn/
+target/
+.dockerignore
