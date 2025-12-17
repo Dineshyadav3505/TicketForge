@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y maven && \
 
 # Copy source and build
 COPY src ./src
-RUN ./mvnw clean package -DskipTests
+RUN mvnw clean package -DskipTests
 
 # Runtime stage - lightweight Alpine JRE
 FROM eclipse-temurin:21-jre-alpine
